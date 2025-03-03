@@ -10,3 +10,6 @@ The following is demonstrated:
 * Generate sources
 * Generate JavaDoc
 * Target definition build
+
+
+tests
