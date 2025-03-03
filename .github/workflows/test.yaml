@@ -19,7 +19,6 @@ jobs:
 
   build:
     runs-on: macos-latest
-     name: Running Java 17 compile
     steps:
     - name: checkout
     - uses: actions/checkout@v4
