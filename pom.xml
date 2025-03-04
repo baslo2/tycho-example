@@ -19,6 +19,8 @@
         <!--maven.deploy.skip>true</maven.deploy.skip-->
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.jarsigner.version>3.1.0</maven.jarsigner.version>
+        <keystore>/tmp/key.jks</keystore>
     </properties>
 
     <build>
@@ -32,6 +34,29 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>${maven.jarsigner.version}</version>
+                <configuration>
+                    <keystore>${keystore}</keystore>
+                    <alias>pgCodeKeeper</alias>
+                    <storepass>pgCodeKeeper</storepass>
+                    <keypass>pgCodeKeeper</keypass>
+                    <arguments>
+                        <argument>-sigalg</argument>
+                        <argument>SHA512withRSA</argument>
+                    </arguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- Skip the install, since we do not need the artifacts in our local mvn repo -->
             <plugin>
