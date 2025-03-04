@@ -9,8 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Decode keystore
-           run: |
-           echo "${{ secrets.TEST_JKS }}" | base64 --decode > mykeystore.jks
+        env:
+          KEYSTORE: ${{ sectrts.TEST_JKS }}
+          run: |
+            echo "convert key base64 string to file"
+            echo "KEYSTORE" >> key.jks.base64
+            base64 --decode key.jks.base64 > key.jks
 
 
   # build:
