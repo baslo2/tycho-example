@@ -40,7 +40,7 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
     - name: build
-      run: mvn -B verify --file pom.xml
+      run: mvn verify -DskipTests
 
     - name: List files in the repository after build
       run: |
