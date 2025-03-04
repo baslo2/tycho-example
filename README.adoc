@@ -12,4 +12,4 @@ The following is demonstrated:
 * Target definition build
 
 
-tests4
+tests5
