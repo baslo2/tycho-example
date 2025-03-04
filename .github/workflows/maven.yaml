@@ -6,10 +6,11 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    steps:
       - name: Decode keystore
-          run: |
-            echo "${{ secrets.TEST_JKS }}" | base64 --decode > mykeystore.jks
+           run: |
+           echo "${{ secrets.TEST_JKS }}" | base64 --decode > mykeystore.jks
 
 
   # build:
