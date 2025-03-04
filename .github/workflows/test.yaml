@@ -33,19 +33,44 @@ jobs:
         java-version: '17'
     - name: build
       run: mvn -B verify --file pom.xml
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: relese-assets
-        path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: relese-assets
-        path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: relese-assets  
-        path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-win32.win32.x86_64.zip
+    # - name: Upload build artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: relese-assets
+    #     path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz
+    # - name: Upload build artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: relese-assets
+    #     path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz
+    # - name: Upload build artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: relese-assets  
+    #     path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-win32.win32.x86_64.zip
     
+    create-release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Токен для доступа к GitHub API
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL для загрузки артефактов
+          asset_path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Путь к файлу, который нужно загрузить
+          asset_name: com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Имя файла в релизе
+          asset_content_type: application/zip
