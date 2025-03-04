@@ -21,6 +21,13 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+    - name: Decode keystore
+      env:
+         KEYSTORE: ${{ secrets.TEST_JKS }}
+      run: |
+            echo "convert key base64 string to file"
+            echo "KEYSTORE" >> key.jks.base64
+            base64 --decode -i key.jks.base64 -o /tmp/key.jks
     - name: checkout
       uses: actions/checkout@v4
     - name: List files in the repository
