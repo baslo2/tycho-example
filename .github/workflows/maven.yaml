@@ -11,7 +11,7 @@ jobs:
       - name: Decode keystore
         env:
           KEYSTORE: ${{ sectrts.TEST_JKS }}
-          run: |
+        run: |
             echo "convert key base64 string to file"
             echo "KEYSTORE" >> key.jks.base64
             base64 --decode key.jks.base64 > key.jks
