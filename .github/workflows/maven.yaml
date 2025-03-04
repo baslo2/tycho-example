@@ -16,7 +16,7 @@ jobs:
             echo "KEYSTORE" >> key.jks.base64
             base64 --decode -i key.jks.base64 -o /tmp/key.jks
             echo "decode finished"
-            ls
+            ls /tmp/
 
 
   # build:
