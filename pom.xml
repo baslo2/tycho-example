@@ -42,6 +42,7 @@
                     <keystore>${keystore}</keystore>
                     <alias>tjs</alias>
                     <storepass>123456</storepass>
+                    <keypass>test</keypass>
                     <arguments>
                         <argument>-sigalg</argument>
                         <argument>SHA512withRSA</argument>
