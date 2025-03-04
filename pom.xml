@@ -20,7 +20,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.jarsigner.version>3.1.0</maven.jarsigner.version>
-        <keystore>/tmp/key.jks</keystore>
+        <keystore>/home/shamsutdinov_er/tmp/keystoret.jks</keystore>
     </properties>
 
     <build>
@@ -41,6 +41,7 @@
                 <configuration>
                     <keystore>${keystore}</keystore>
                     <alias>tjs</alias>
+                    <storepass>123456</storepass>
                     <arguments>
                         <argument>-sigalg</argument>
                         <argument>SHA512withRSA</argument>
