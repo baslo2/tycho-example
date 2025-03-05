@@ -10,14 +10,23 @@ jobs:
     steps:
         - name: download jre
           run: |
-            mkdir tmp/jre
+            mkdir tmp
             ls
+            echo "------------------------------"
+            cd tmp
+            mkdir jre
             echo "------------------------------"
             cd jre
             mkdir x86
             mkdir aarch64
             ls
+            cd
             echo "------------------------------"
+            echo "download jre"
+            curl -L -o tmp/jre/x86/  https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
+            echo "download finished"
+            echo "----------------------------------"
+            ls tmp/jre/x86
 
     
       # - name: Decode keystore
