@@ -32,6 +32,11 @@ jobs:
             echo "download finished"
             echo "----------------------------------"
             ls work/tycho-example/tycho-example/tmp/jre/x86/
+            echo "extract archive"
+            tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
+            echo "extract finished"
+            echo "--------------------------------"
+            ls work/tycho-example/tycho-example/tmp/jre/x86/
 
     
       # - name: Decode keystore
