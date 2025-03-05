@@ -11,7 +11,7 @@ jobs:
         - name: download jre
           run: |
             mkdir -p tmp/jre
-            ls /tmp/
+            ls /tmp
 
     
       # - name: Decode keystore
