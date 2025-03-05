@@ -30,8 +30,6 @@ jobs:
     #         base64 --decode -i key.jks.base64 -o /tmp/key.jks
     #         ls /tmp/
 
-    - name: Create keystore
-      run: keytool -genkeypair-alias tjs -keyalg RSA -keysize 2048 -validity 365 -keystore /tmp/key.jks -storepass 123456 -keypass 123456 -dname "CN=MyApp, OU=Development, O=MyCompany, L=City, ST=State, C=Country"
 
     - name: checkout
       uses: actions/checkout@v4
@@ -43,6 +41,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '17'
+    - name: Create keystore
+      run: keytool -genkeypair-alias tjs -keyalg RSA -keysize 2048 -validity 365 -keystore /tmp/key.jks -storepass 123456 -keypass 123456 -dname "CN=MyApp, OU=Development, O=MyCompany, L=City, ST=State, C=Country"
+
     - name: build
       run: mvn verify -DskipTests
 
