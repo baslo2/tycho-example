@@ -40,6 +40,10 @@ jobs:
             echo "-------------------------------------"
             echo "rename directory"
             mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
+            echo "rename finished"
+            echo "------------------------------------"
+            ls work/tycho-example/tycho-example/tmp/jre/x86/
+            
             
 
     
