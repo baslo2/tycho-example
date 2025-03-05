@@ -12,9 +12,16 @@ jobs:
           run: |
             mkdir tmp
             ls
+            echo "------------------------------"
             cd tmp
             mkdir jre
             ls
+            echo "------------------------------"
+            cd jre
+            mkdir x86
+            mkdir aarch64
+            ls
+            echo "------------------------------"
 
     
       # - name: Decode keystore
