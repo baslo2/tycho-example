@@ -10,8 +10,8 @@ jobs:
     steps:
         - name: download jre
           run: |
-            mkdir -p tmp/jre
-            ls /tmp
+            mkdir tmp
+            ls
 
     
       # - name: Decode keystore
