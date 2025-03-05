@@ -31,7 +31,7 @@ jobs:
             curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
             echo "download finished"
             echo "----------------------------------"
-            ls tmp/jre/x86
+            ls work/tycho-example/tycho-example/tmp/jre/x86/
 
     
       # - name: Decode keystore
