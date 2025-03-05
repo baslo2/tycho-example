@@ -10,7 +10,7 @@ jobs:
     steps:
         - name: download jre
           run: |
-            cd work
+            cd Downloads
             mkdir tmp
             ls
             echo "------------------------------"
