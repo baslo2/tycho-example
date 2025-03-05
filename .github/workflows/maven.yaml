@@ -10,11 +10,7 @@ jobs:
     steps:
         - name: download jre
           run: |
-            mkdir tmp
-            ls
-            echo "------------------------------"
-            cd tmp
-            mkdir jre
+            mkdir tmp/jre
             ls
             echo "------------------------------"
             cd jre
