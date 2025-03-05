@@ -43,6 +43,8 @@ jobs:
             echo "rename finished"
             echo "------------------------------------"
             ls work/tycho-example/tycho-example/tmp/jre/x86/
+            echo "--------------------------------------"
+            ls work/tycho-example/tycho-example/tmp/jre/x86/jre/
             
             
 
