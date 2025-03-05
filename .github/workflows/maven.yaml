@@ -11,7 +11,7 @@ jobs:
         - name: download jre
           run: |
             ls
-            cd Downloads
+            cd /Downloads
             mkdir tmp
             ls
             echo "------------------------------"
