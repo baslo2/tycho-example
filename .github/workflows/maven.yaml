@@ -15,6 +15,7 @@ jobs:
             echo "------------------------------"
             cd tmp
             mkdir jre
+            ls
             echo "------------------------------"
             cd jre
             mkdir x86
