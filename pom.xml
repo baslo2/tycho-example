@@ -36,6 +36,28 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-x86</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/jre/x86</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jarsigner-plugin</artifactId>
                 <version>${maven.jarsigner.version}</version>
                 <configuration>
@@ -104,57 +126,7 @@
                     </environments>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-x86</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/jre/x86</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-p2-director-plugin</artifactId>
-                <version>${tycho.version}</version>
-                <configuration>
-                    <formats>
-                        <win32>zip</win32>
-                        <linux>tar.gz</linux>
-                        <macosx>tar.gz</macosx>
-                    </formats>
-                    <products>
-                        <product>
-                            <id>com.vogella.tycho.product</id>
-                            <rootFolders>
-                                <macosx>Eclipse.app</macosx>
-                            </rootFolders>
-                        </product>
-                    </products>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>materialize-products</id>
-                        <goals>
-                            <goal>materialize-products</goal>
-                            <goal>archive-products</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!-- enable source feature generation -->
             <!--plugin>
                 <groupId>org.eclipse.tycho.extras</groupId>
