@@ -74,7 +74,7 @@ jobs:
       run: |
           ls /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products
     - name: List jre location
-      run: ls work/tycho-example/tycho-example/tmp/jre/x86
+      run: ls /Users/runner/work/tycho-example/tycho-example/tmp/jre/x86
     - name: List files in macos build
       run: ls /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
