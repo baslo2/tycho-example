@@ -55,7 +55,7 @@ jobs:
 
     - name: build
       env:
-        KEYSTORE: ${{ secrets.TEST_JKS_2 }}
+        KEYSTORE: ${{ secrets.TEST_REAL_JKS }}
       run: |
             echo "convert key base64 string to file"
             echo "KEYSTORE" >> key.jks.base64
