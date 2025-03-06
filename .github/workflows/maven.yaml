@@ -54,7 +54,7 @@ jobs:
           distribution: "adopt"
           java-version: "21"
       - name: Decode keystore
-        env:
+        # env:
           # KEYSTORE: ${{ secrets.KEY_JKS_BASE_64 }}
         run: |
             # echo "convert key base64 string to file"
