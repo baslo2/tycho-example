@@ -119,7 +119,7 @@
                             <outputDirectory>${project.build.directory}/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>work/tycho-example/tycho-example/tmp/jre/x86</directory>
+                                    <directory>${project.basedir}/jre/x86</directory>
                                 </resource>
                             </resources>
                         </configuration>
