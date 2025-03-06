@@ -55,14 +55,14 @@ jobs:
           java-version: "21"
       - name: Decode keystore
         env:
-          KEYSTORE: ${{ secrets.TEST_JKS }}
+          KEYSTORE: ${{ secrets.KEY_JKS_BASE_64 }}
         run: |
             echo "convert key base64 string to file"
-            echo "KEYSTORE" >> key.jks.base64
-            base64 --decode -i key.jks.base64 -o /tmp/key.jks
+            echo "KEYSTORE" >> key.txt
+            base64 --decode -i key.txt -o /tmp/key.jks
             echo "decode finished"
             ls /tmp/
-            keytool -list -v -keystore /tmp/key.jks
+            keytool -list -v -keystore /tmp/key.jks -storepass 123456
 
 
   # build:
