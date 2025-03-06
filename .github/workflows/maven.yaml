@@ -49,11 +49,11 @@ jobs:
             
 
     
-      - name: Decode keystore
-        uses: actions/setup-java@v2
+      - uses: actions/setup-java@v2
         with:
           distribution: "adopt"
           java-version: "21"
+      - name: Decode keystore
         env:
           KEYSTORE: ${{ secrets.TEST_JKS }}
         run: |
