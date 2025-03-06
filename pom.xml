@@ -116,7 +116,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>/Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
+                            <outputDirectory>${project.build.directory}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>work/tycho-example/tycho-example/tmp/jre/x86</directory>
