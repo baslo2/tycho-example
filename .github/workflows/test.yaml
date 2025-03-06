@@ -73,6 +73,8 @@ jobs:
     - name: List files in the repository after build
       run: |
           ls /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products
+    - name: List files in macos build
+      run: ls /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
       
     - name: Set env
