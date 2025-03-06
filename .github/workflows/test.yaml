@@ -67,6 +67,7 @@ jobs:
             mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
             echo "rename finished"
             echo "------------------------------------"
+            cd /Users/runner/work/tycho-example/tycho-example/
             mvn verify -DskipTests
 
     - name: List files in the repository after build
