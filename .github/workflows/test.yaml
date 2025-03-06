@@ -44,7 +44,7 @@ jobs:
     - name: Create keystore
       uses: 1arp/create-a-file-action@0.4.5
       with:
-        path: /tmp/
+        path: test
         isAbsolutePath: false
         file: key.jks
         content: ${{ secrets.TEST_REAL_JKS }}
