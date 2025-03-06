@@ -77,7 +77,7 @@ jobs:
 
     - name: List files in the repository after build
       run: |
-          ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products
+          ls ${{ github.workspace }}
           echo "--------------------------------------"
           echo "list macos build"
           ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
