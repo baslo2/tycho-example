@@ -104,6 +104,28 @@
                     </environments>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-x86</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/releng/com.vogella.tycho.product/targer/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>work/tycho-example/tycho-example/tmp/jre/x86</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- enable source feature generation -->
             <!--plugin>
                 <groupId>org.eclipse.tycho.extras</groupId>
