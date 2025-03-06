@@ -46,7 +46,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
+                            <outputDirectory>${project.basedir}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.basedir}/jre/x86</directory>
