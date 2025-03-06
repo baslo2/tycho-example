@@ -72,6 +72,10 @@ jobs:
             echo "--------------------------------------"
             cd /Users/runner/work/tycho-example/tycho-example/
             mvn verify -DskipTests
+            echo "--------------------------------------"
+            echo "list macos build"
+            ls /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
+
 
     - name: List files in the repository after build
       run: |
