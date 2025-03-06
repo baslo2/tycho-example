@@ -61,6 +61,9 @@ jobs:
             echo "KEYSTORE" >> key.jks.base64
             base64 --decode -i key.jks.base64 -o ${{ github.workspace }}/key.jks
             echo "--------------------------------"
+            echo "key.jks location"
+            ls ${{ github.workspace }}
+            echo "--------------------------------"
             echo "create temp dirs for jre"
             mkdir ${{ github.workspace }}/jre
             cd jre
