@@ -41,20 +41,25 @@ jobs:
         distribution: 'adopt'
         java-version: '17'
     
-    - name: Create keystore
-      uses: 1arp/create-a-file-action@0.4.5
-      with:
-        path: test
-        isAbsolutePath: false
-        file: key.jks
-        content: ${{ secrets.TEST_REAL_JKS }}
+    # - name: Create keystore
+    #   uses: 1arp/create-a-file-action@0.4.5
+    #   with:
+    #     path: test
+    #     isAbsolutePath: false
+    #     file: key.jks
+    #     content: ${{ secrets.TEST_REAL_JKS }}
       # run: keytool -genkeypair -alias tjs -keyalg RSA -keysize 2048 -validity 365 -keystore /tmp/key.jks -storepass 123456 -keypass 123456 -dname "CN=MyApp, OU=Development, O=MyCompany, L=City, ST=State, C=Country"
 
     - name: check jks location
       run: ls test
 
     - name: build
+      env:
+        KEYSTORE: ${{ secrets.TEST_JKS_2 }}
       run: |
+            echo "convert key base64 string to file"
+            echo "KEYSTORE" >> key.jks.base64
+            base64 --decode -i key.jks.base64 -o /tmp/key.jks
             echo "--------------------------------"
             echo "create temp dirs for jre"
             mkdir ${{ github.workspace }}/jre
