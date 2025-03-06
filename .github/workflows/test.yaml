@@ -51,7 +51,7 @@ jobs:
       # run: keytool -genkeypair -alias tjs -keyalg RSA -keysize 2048 -validity 365 -keystore /tmp/key.jks -storepass 123456 -keypass 123456 -dname "CN=MyApp, OU=Development, O=MyCompany, L=City, ST=State, C=Country"
 
     - name: check jks location
-      run: ls tmp
+      run: ls test
 
     - name: build
       run: |
