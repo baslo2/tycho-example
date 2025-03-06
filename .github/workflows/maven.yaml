@@ -8,56 +8,61 @@ jobs:
   test:
     runs-on: macos-latest
     steps:
-        - name: download jre
-          run: |
-            mkdir tmp
-            ls
-            echo "------------------------------"
-            cd tmp
-            mkdir jre
-            ls
-            echo "------------------------------"
-            cd jre
-            mkdir x86
-            mkdir aarch64
-            ls
-            cd
-            echo "------------------------------"
-            ls
-            echo "------------------------------"
-            ls work/tycho-example/tycho-example/tmp
-            echo "------------------------------"
-            echo "download jre"
-            curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
-            echo "download finished"
-            echo "----------------------------------"
-            ls work/tycho-example/tycho-example/tmp/jre/x86/
-            echo "extract archive"
-            tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
-            echo "extract finished"
-            echo "--------------------------------"
-            ls work/tycho-example/tycho-example/tmp/jre/x86/
-            echo "-------------------------------------"
-            echo "rename directory"
-            mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
-            echo "rename finished"
-            echo "------------------------------------"
-            ls work/tycho-example/tycho-example/tmp/jre/x86/
-            echo "--------------------------------------"
-            ls work/tycho-example/tycho-example/tmp/jre/x86/jre/
+        # - name: download jre
+        #   run: |
+        #     mkdir tmp
+        #     ls
+        #     echo "------------------------------"
+        #     cd tmp
+        #     mkdir jre
+        #     ls
+        #     echo "------------------------------"
+        #     cd jre
+        #     mkdir x86
+        #     mkdir aarch64
+        #     ls
+        #     cd
+        #     echo "------------------------------"
+        #     ls
+        #     echo "------------------------------"
+        #     ls work/tycho-example/tycho-example/tmp
+        #     echo "------------------------------"
+        #     echo "download jre"
+        #     curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
+        #     echo "download finished"
+        #     echo "----------------------------------"
+        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+        #     echo "extract archive"
+        #     tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
+        #     echo "extract finished"
+        #     echo "--------------------------------"
+        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+        #     echo "-------------------------------------"
+        #     echo "rename directory"
+        #     mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
+        #     echo "rename finished"
+        #     echo "------------------------------------"
+        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+        #     echo "--------------------------------------"
+        #     ls work/tycho-example/tycho-example/tmp/jre/x86/jre/
             
             
 
     
-      # - name: Decode keystore
-      #   env:
-      #     KEYSTORE: ${{ secrets.TEST_JKS }}
-      #   run: |
-      #       echo "convert key base64 string to file"
-      #       echo "KEYSTORE" >> key.jks.base64
-      #       base64 --decode -i key.jks.base64 -o /tmp/key.jks
-      #       echo "decode finished"
-      #       ls /tmp/
+      - name: Decode keystore
+        uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: "21"
+        env:
+          KEYSTORE: ${{ secrets.TEST_JKS }}
+        run: |
+            echo "convert key base64 string to file"
+            echo "KEYSTORE" >> key.jks.base64
+            base64 --decode -i key.jks.base64 -o /tmp/key.jks
+            echo "decode finished"
+            ls /tmp/
+            keytool -list -v -keystore key.jks
 
 
   # build:
