@@ -30,7 +30,30 @@ jobs:
     #         base64 --decode -i key.jks.base64 -o /tmp/key.jks
     #         ls /tmp/
 
-
+    - name: download jre
+      run: |
+            echo "--------------------------------"
+            echo "create temp dirs for jre"
+            mkdir tmp
+            cd tmp
+            mkdir jre
+            cd jre
+            mkdir x86
+            mkdir aarch64
+            cd
+            echo "----------------------------------"
+            echo "download jre"
+            curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
+            echo "download finished"
+            echo "----------------------------------"
+            echo "extract archive"
+            tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
+            echo "extract finished"
+            echo "-------------------------------------"
+            echo "rename directory"
+            mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
+            echo "rename finished"
+            echo "------------------------------------"
     - name: checkout
       uses: actions/checkout@v4
     - name: List files in the repository
