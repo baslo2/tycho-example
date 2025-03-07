@@ -57,7 +57,7 @@ jobs:
     - name: create temp key
       uses: 1arp/create-a-file-action@0.4.5
       with:
-        path: Users/runner/work/tycho-example/tycho-example/
+        path: Users/runner/work/tycho-example/tycho-example
         isAbsolutePath: false
         file: key.txt
         content: ${{ secrets.KEY_JKS_BASE_64 }}]
