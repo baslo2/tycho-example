@@ -64,7 +64,7 @@ jobs:
     - name: check jks loc
       run: ls Users/runner/work/tycho-example/tycho-example/
     - name: decode keystore
-      run: base64 --decode -i Users/runner/work/tycho-example/tycho-example/key.txt -o Users/runner/work/tycho-example/tycho-example/key.jks
+      run: base64 --decode -i /Users/runner/work/tycho-example/tycho-example/key.txt -o /Users/runner/work/tycho-example/tycho-example/key.jks
     - name: check jks loc
       run: ls Users/runner/work/tycho-example/tycho-example/
     - name: build
