@@ -53,17 +53,28 @@ jobs:
         with:
           distribution: "adopt"
           java-version: "21"
-      - name: Decode keystore
-        env:
-          KEYSTORE: ${{ secrets.KEY_JKS_BASE_64 }}
-        run: |
-            echo "convert key base64 string to file"
-            echo "KEYSTORE" >> key.jks.base64
-            echo ${{ secrets.KEY_JKS_BASE_64 }} 
-            base64 --decode -i key.jks.base64 -o /tmp/key.jks
-            echo "decode finished"
-            ls /tmp/
-            keytool -list -v -keystore /tmp/key.jks -storepass 123456
+      - name: Create keystore
+        uses: 1arp/create-a-file-action@0.4.5
+        with:
+          path: test
+          isAbsolutePath: false
+          file: key.txt
+          content: ${{ secrets.KEY_JKS_BASE_64 }}
+        run: ls /test/
+
+
+          
+      # - name: Decode keystore
+      #   env:
+      #     KEYSTORE: ${{ secrets.KEY_JKS_BASE_64 }}
+      #   run: |
+      #       echo "convert key base64 string to file"
+      #       echo "KEYSTORE" >> key.jks.base64
+      #       echo ${{ secrets.KEY_JKS_BASE_64 }} 
+      #       base64 --decode -i key.jks.base64 -o /tmp/key.jks
+      #       echo "decode finished"
+      #       ls /tmp/
+      #       keytool -list -v -keystore /tmp/key.jks -storepass 123456
 
 
   # build:
