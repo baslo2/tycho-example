@@ -66,7 +66,7 @@ jobs:
     - name: decode keystore
       run: base64 --decode -i Users/runner/work/tycho-example/tmp/key.txt -o Users/runner/work/tycho-example/tmp/key.jks
     - name: check jks loc
-      run: ls Users/runner/work/tycho-example/tycho-example/
+      run: ls Users/runner/work/tycho-example/tmp/
     - name: build
       env:
         KEYSTORE: ${{ secrets.TEST_REAL_JKS }}
