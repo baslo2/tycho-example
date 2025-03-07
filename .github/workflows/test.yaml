@@ -39,7 +39,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'adopt'
-        java-version: '17'
+        java-version: '21'
     
     # - name: Create keystore
     #   uses: 1arp/create-a-file-action@0.4.5
@@ -59,7 +59,7 @@ jobs:
       with:
         path: Users/runner/work/tycho-example/tycho-example
         isAbsolutePath: false
-        file: key.txt
+        file: Users/runner/work/tycho-example/tycho-example/key.txt
         content: ${{ secrets.KEY_JKS_BASE_64 }}]
     - name: check jks loc
       run: ls Users/runner/work/tycho-example/tycho-example/
