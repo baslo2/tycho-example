@@ -64,6 +64,8 @@ jobs:
         run: base64 --decode -i test/key.txt -o test/key.jks
       - name: Check jks location   
         run: ls test
+      - name: check jks keystore
+        run: keytool -v -list -keystore test/key.jks -storepass 123456
 
           
       # - name: Decode keystore
