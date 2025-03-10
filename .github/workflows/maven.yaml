@@ -64,6 +64,8 @@ jobs:
         run: base64 --decode -i test/test.base64 -o test/test.cer
       - name: Check cer location   
         run: ls test
+      - name: add cer to Keychain
+        run: sudo security add-trusted-cert -d -r trustRoot /Library/Keychains/System.keychain test/test.cer
       - name: check cer keystore
         run: openssl x509 -in test/test.cer -text -noout
 
