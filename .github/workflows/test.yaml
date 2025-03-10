@@ -109,22 +109,21 @@ jobs:
           echo "list macos build"
           ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
-    - name: Create keystore
-      uses: 1arp/create-a-file-action@0.4.5
-      with:
-          path: keystore
-          isAbsolutePath: false
-          file: test.txt
-          content: ${{ secrets.MAC_CER_BASE_64 }}
-    - name: decode mac cert
-      run: base64 --decode -i keystore/test.txt -o keystore/test.cer
-    - name: Check cer location   
-      run: ls keystore
-    - name: add cer to Keychain
-      run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain keystore/test.cer
+    - name: Install Apple Certificate
+      env:
+        CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64_3 }}
+        CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
+      run: |
+        echo $CERTIFICATE_P12 | base64 --decode > certificate.p12
+        security create-keychain -p "" build.keychain
+        security default-keychain -s build.keychain
+        security unlock-keychain -p "" build.keychain
+        security import certificate.p12 -k build.keychain -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+        security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+        rm certificate.p12
 
     - name: mac sign
-      run: codesign --deep --force --verify --verbose --sign "test" /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
+      run: codesign --deep --force --verify --verbose --sign "testApp" /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
