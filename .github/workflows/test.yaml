@@ -122,6 +122,9 @@ jobs:
         security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         rm test2.p12
 
+    - name: check added cert
+      run: security find-certificate -c "testApp" /Users/runner/Library/Keychains/build.keychain-db
+
     - name: mac sign
       run: codesign --deep --force --verify --verbose --keychain /Users/runner/Library/Keychains/build.keychain-db --sign "testApp" /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
