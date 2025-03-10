@@ -122,6 +122,9 @@ jobs:
         security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         rm test2.p12
 
+    - name: check sum
+      run: openssl sha1 test2.p12
+
     - name: check added cert
       run: security find-certificate -c "testApp" /Users/runner/Library/Keychains/build.keychain-db
 
