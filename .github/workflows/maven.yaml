@@ -65,7 +65,7 @@ jobs:
       - name: Check cer location   
         run: ls test
       - name: check cer keystore
-        run: openssl x509 -in test/key.cer
+        run: openssl x509 -in test/key.cer -text -noout
 
           
       # - name: Decode keystore
