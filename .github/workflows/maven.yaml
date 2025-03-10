@@ -67,7 +67,7 @@ jobs:
       - name: add cer to Keychain
         run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test/test.cer
       - name: check cer keystore
-        run: openssl x509 -in test/test.cer -text -noout
+        run: openssl x509 -in test.cer -text -noout
 
           
       # - name: Decode keystore
