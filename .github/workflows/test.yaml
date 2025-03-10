@@ -119,7 +119,7 @@ jobs:
     - name: decode mac cert
       run: base64 --decode -i keystore/test.txt -o keystore/test.cer
     - name: Check cer location   
-      run: ls test
+      run: ls keystore
     - name: add cer to Keychain
       run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain keystore/test.cer
       
