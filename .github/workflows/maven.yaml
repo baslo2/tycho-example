@@ -58,14 +58,14 @@ jobs:
         with:
           path: test
           isAbsolutePath: false
-          file: key.txt
+          file: test.txt
           content: ${{ secrets.MAC_CER_BASE_64 }}
       - name: decode keystore
-        run: base64 --decode -i test/key.txt -o test/key.cer
+        run: base64 --decode -i test/test.txt -o test/test.cer
       - name: Check cer location   
         run: ls test
       - name: check cer keystore
-        run: openssl x509 -in test/key.cer -text -noout
+        run: openssl x509 -in test/test.cer -text -noout
 
           
       # - name: Decode keystore
