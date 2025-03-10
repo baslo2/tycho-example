@@ -49,25 +49,25 @@ jobs:
             
 
     
-      # - uses: actions/setup-java@v2
-      #   with:
-      #     distribution: "adopt"
-      #     java-version: "21"
-      # - name: Create keystore
-      #   uses: 1arp/create-a-file-action@0.4.5
-      #   with:
-      #     path: test
-      #     isAbsolutePath: false
-      #     file: test.base64
-      #     content: ${{ secrets.MAC_CER_BASE_64_2 }}
-      # - name: decode keystore
-      #   run: base64 --decode -i test/test.base64 -o test/test.cer
-      # - name: Check cer location   
-      #   run: ls test
-      # - name: add cer to Keychain
-      #   run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test/test.cer
-      # - name: check added cert
-      #   run: security find-certificate -c "test" /Library/Keychains/System.keychain
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "adopt"
+          java-version: "21"
+      - name: Create keystore
+        uses: 1arp/create-a-file-action@0.4.5
+        with:
+          path: test
+          isAbsolutePath: false
+          file: test.base64
+          content: ${{ secrets.MAC_CER_BASE_64_2 }}
+      - name: decode keystore
+        run: base64 --decode -i test/test.base64 -o test/test.cer
+      - name: Check cer location   
+        run: ls test
+      - name: add cer to Keychain
+        run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test/test.cer
+      - name: check added cert
+        run: security find-certificate -c "test" /Library/Keychains/System.keychain
       # - name: check trust
       #   run: security dump-trust-settings
       - name: check cert
