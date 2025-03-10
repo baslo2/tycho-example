@@ -123,7 +123,7 @@ jobs:
         CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
-        base64 --decode -i test/test.txt -o test.cer
+        base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o test.cer
         security create-keychain -p "" build.keychain
         security default-keychain -s build.keychain
         security unlock-keychain -p "" build.keychain
