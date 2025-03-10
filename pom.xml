@@ -56,29 +56,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>${maven.jarsigner.version}</version>
-                <configuration>
-                    <keystore>${keystore}</keystore>
-                    <alias>tjs</alias>
-                    <storepass>123456</storepass>
-                    <keypass>123456</keypass>
-                    <arguments>
-                        <argument>-sigalg</argument>
-                        <argument>SHA512withRSA</argument>
-                    </arguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>sign</id>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- Skip the install, since we do not need the artifacts in our local mvn repo -->
             <plugin>
