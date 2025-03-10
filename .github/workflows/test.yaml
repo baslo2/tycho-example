@@ -128,7 +128,7 @@ jobs:
         security default-keychain -s build.keychain
         security unlock-keychain -p "" build.keychain
         security import test.cer -k build.keychain 
-        security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+        # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         echo "------------------------------------"
         echo "check sum"
         openssl sha1 test.cer
