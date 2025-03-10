@@ -124,10 +124,10 @@ jobs:
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
         base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o test.cer
-        security create-keychain -p "" build.keychain
-        security default-keychain -s build.keychain
-        security unlock-keychain -p "" build.keychain
-        security import test.cer -k build.keychain 
+        # security create-keychain -p "" build.keychaine
+        # security default-keychain -s build.keychain
+        # security unlock-keychain -p "" build.keychain
+        security import test.cer -k /Library/Keychains/System.keychain
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         echo "------------------------------------"
         echo "check sum"
@@ -143,7 +143,7 @@ jobs:
       run: security find-certificate -c "test" /Users/runner/Library/Keychains/build.keychain-db
 
     - name: mac sign
-      run: codesign --deep --force --verify --verbose --keychain /Users/runner/Library/Keychains/build.keychain-db --sign "test" /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
+      run: codesign --deep --force --verify --verbose --sign "test" /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
