@@ -109,12 +109,21 @@ jobs:
           echo "list macos build"
           ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
+
+    - name: Create keystore
+      uses: 1arp/create-a-file-action@0.4.5
+      with:
+          path: test
+          isAbsolutePath: false
+          file: test.txt
+          content: ${{ secrets.MAC_CER_BASE_64 }}
+
     - name: Install Apple Certificate
       env:
         CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
-        echo $CERTIFICATE_P12 | base64 --decode > test.cer
+        base64 --decode -i test/test.txt -o test.cer
         security create-keychain -p "" build.keychain
         security default-keychain -s build.keychain
         security unlock-keychain -p "" build.keychain
