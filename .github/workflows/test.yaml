@@ -139,9 +139,9 @@ jobs:
         echo "import"
         security import test.cer -k /tmp/Keychains/build.keychain-db
         echo "check aaded sert"
+        security set-key-partition-list -S apple-tool:,apple: -s -k "" /tmp/Keychains/build.keychain-db
+        sudo security add-trusted-cert -d -r trustRoot -k /tmp/Keychains/build.keychain-db test.cer
         security find-identity -p codesigning /tmp/Keychains/build.keychain-db
-        # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
-        # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
         
 
     - name: some other chek loc
