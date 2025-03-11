@@ -147,7 +147,7 @@ jobs:
     #   run: openssl sha1 test2.p12
 
     - name: check added cert
-      run: security find-identity -p codesigning
+      run: security find-identity -p codesigning /Users/runner/Library/Keychains/build.keychain-db
 
     - name: mac sign
       run: codesign --deep --force --verify --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
