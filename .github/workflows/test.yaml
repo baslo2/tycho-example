@@ -136,8 +136,6 @@ jobs:
         security default-keychain -s /tmp/Keychains/build.keychain-db
         echo "unlock"
         security unlock-keychain -p "" /tmp/Keychains/build.keychain-db
-        echo "set-key-part-list"
-        security set-key-partition-list -S apple-tool:,apple: -s -k "" /tmp/Keychains/build.keychain-db
         echo "import"
         security import test.cer -k /tmp/Keychains/build.keychain-db
         echo "add trust"
