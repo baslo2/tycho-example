@@ -127,10 +127,10 @@ jobs:
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
         base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o test.cer
-        # security create-keychain -p "" build.keychaine
-        # security default-keychain -s build.keychain
-        security unlock-keychain -p "" /Library/Keychains/System.keychain
-        security import test.cer -k /Library/Keychains/System.keychain
+        security create-keychain -p "" build.keychaine
+        security default-keychain -s build.keychain
+        security unlock-keychain -p "" build.keychain
+        security import test.cer -k build.keychain
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
         echo "------------------------------------"
