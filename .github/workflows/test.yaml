@@ -137,7 +137,7 @@ jobs:
         echo "set default"
         security default-keychain -s /private/tmp/Keychains/build.keychain-db
         echo "check default keychain"
-        security list-keychains -d
+        security list-keychains -d user
         echo "unlock"
         security unlock-keychain -p "" /private/tmp/Keychains/build.keychain-db
         echo "import"
