@@ -130,6 +130,8 @@ jobs:
         base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o test.cer
         echo "create"
         security create-keychain -p "" /Library/Keychains/build.keychain-db
+        echo "chek loc"
+        ls /Library/Keychains
         echo "set default"
         security default-keychain -s /Library/Keychains/build.keychain-db
         echo "unlock"
