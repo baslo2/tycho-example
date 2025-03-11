@@ -138,7 +138,7 @@ jobs:
         openssl sha1 test.cer
 
     - name: some other chek loc
-      run: ls
+      run: ls /Library/Keychains
 
 
     # -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
