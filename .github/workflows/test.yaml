@@ -131,19 +131,19 @@ jobs:
         echo "check cert"
         ls
         echo "create"
-        security create-keychain -p "" /tmp/Keychains/build.keychain-db
+        security create-keychain -p "" /tmp/Keychains/build.keychain
         echo "chek loc"
         ls /tmp/Keychains
         echo "set default"
-        security default-keychain -s /private/tmp/Keychains/build.keychain-db
+        security default-keychain -s /private/tmp/Keychains/build.keychain
         echo "check default keychain"
         security list-keychains -d user
         echo "unlock"
-        security unlock-keychain -p "" /private/tmp/Keychains/build.keychain-db
+        security unlock-keychain -p "" /private/tmp/Keychains/build.keychain
         echo "import"
         security import /Users/runner/work/tycho-example/tycho-example/test/test.cer
         echo "check aaded sert"
-        security find-identity -p codesigning /private/tmp/Keychains/build.keychain-db
+        security find-identity -p codesigning /private/tmp/Keychains/build.keychain
         
 
     - name: some other chek loc
@@ -156,10 +156,10 @@ jobs:
     #   run: openssl sha1 test2.p12
 
     - name: check added cert
-      run: security find-identity -p codesigning /tmp/Keychains/build.keychain-db
+      run: security find-identity -p codesigning /tmp/Keychains/build.keychain
 
     - name: mac sign
-      run: codesign --deep --force --verify --keychain /tmp/Keychains/build.keychain-db --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
+      run: codesign --deep --force --verify --keychain /tmp/Keychains/build.keychain --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
