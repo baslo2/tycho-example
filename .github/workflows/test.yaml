@@ -135,17 +135,15 @@ jobs:
         echo "chek loc"
         ls /tmp/Keychains
         echo "set default"
-        security default-keychain -s /tmp/Keychains/build.keychain-db
+        security default-keychain -s /private/tmp/Keychains/build.keychain-db
         echo "check default keychain"
         security list-keychains
         echo "unlock"
-        security unlock-keychain -p "" /tmp/Keychains/build.keychain-db
+        security unlock-keychain -p "" /private/tmp/Keychains/build.keychain-db
         echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /tmp/Keychains/build.keychain-db
-        echo "add trust"
-        sudo security add-trusted-cert -d -r trustRoot -k /tmp/Keychains/build.keychain-db /Users/runner/work/tycho-example/tycho-example/test/test.cer
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain-db
         echo "check aaded sert"
-        security find-identity -p codesigning /tmp/Keychains/build.keychain-db
+        security find-identity -p codesigning /private/tmp/Keychains/build.keychain-db
         
 
     - name: some other chek loc
