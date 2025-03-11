@@ -145,7 +145,7 @@ jobs:
         openssl sha1 test.cer
 
     - name: some other chek loc
-      run: ls /Library/Keychains
+      run: ls /tmp/Keychains
 
 
     # -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
@@ -157,7 +157,7 @@ jobs:
       run: security find-identity -p codesigning build.keychain-db
 
     - name: mac sign
-      run: codesign --deep --force --verify --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
+      run: codesign --deep --force --verify --keychain /tmp/Keychains/build.keychain-db --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
