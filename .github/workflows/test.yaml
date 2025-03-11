@@ -118,6 +118,9 @@ jobs:
           file: test.txt
           content: ${{ secrets.MAC_CER_BASE_64 }}
 
+    - name: check Keychains
+      run: ls /Library/Keychains
+
     - name: Install Apple Certificate
       env:
         CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
@@ -127,7 +130,7 @@ jobs:
         # security create-keychain -p "" build.keychaine
         # security default-keychain -s build.keychain
         # security unlock-keychain -p "" build.keychain
-        security import test.cer
+        security import test.cer -k /Library/Keychains/System.keychain
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
         echo "------------------------------------"
