@@ -138,11 +138,11 @@ jobs:
         security unlock-keychain -p "" /tmp/Keychains/build.keychain-db
         echo "import"
         security import test.cer -k /tmp/Keychains/build.keychain-db
+        echo "check aaded sert"
+        security find-identity -p codesigning /tmp/Keychains/build.keychain-db
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
-        echo "------------------------------------"
-        echo "check sum"
-        openssl sha1 test.cer
+        
 
     - name: some other chek loc
       run: ls /tmp/Keychains
