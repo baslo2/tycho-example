@@ -141,9 +141,7 @@ jobs:
         echo "unlock"
         security unlock-keychain -p "" /private/tmp/Keychains/build.keychain
         echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer
-        echo "set-key-part-list"
-        security set-key-partition-list -S apple-tool:,apple: -s -k "" /private/tmp/Keychains/build.keychain
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -T /usr/bin/codesign
         echo "check aaded sert"
         security find-identity -p codesigning /private/tmp/Keychains/build.keychain
         
@@ -151,6 +149,9 @@ jobs:
     - name: some other chek loc
       run: ls /tmp/Keychains
 
+
+        # echo "set-key-part-list"
+        # security set-key-partition-list -S apple-tool:,apple: -s -k "" /private/tmp/Keychains/build.keychain
 
     # -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
 
