@@ -129,7 +129,7 @@ jobs:
         # security unlock-keychain -p "" build.keychain
         security import test.cer
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
-        sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
+        # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
         echo "------------------------------------"
         echo "check sum"
         openssl sha1 test.cer
