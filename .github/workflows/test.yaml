@@ -140,6 +140,8 @@ jobs:
         security list-keychains -d user
         echo "unlock"
         security unlock-keychain -p "" /private/tmp/Keychains/build.keychain
+        echo "set-key-part-list"
+        security set-key-partition-list -S app-tool:,apple: -s -k "" /private/tmp/Keychains/build.keychain
         echo "import"
         security import /Users/runner/work/tycho-example/tycho-example/test/test.cer
         echo "check aaded sert"
