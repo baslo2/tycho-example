@@ -121,24 +121,24 @@ jobs:
     - name: check Keychains
       run: ls /Library/Keychains
 
-    - name: some other chek loc
-      run: ls
-
     - name: Install Apple Certificate
       env:
         CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
         base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o test.cer
-        security create-keychain -p "" /Users/runner/Library/Keychains/build.keychain-db
-        security default-keychain -s /Users/runner/Library/Keychains/build.keychain-db
-        security unlock-keychain -p "" /Users/runner/Library/Keychains/build.keychain-db
-        security import test.cer -k /Users/runner/Library/Keychains/build.keychain-db
+        security create-keychain -p "" build.keychain-db
+        security default-keychain -s build.keychain-db
+        security unlock-keychain -p "" build.keychain-db
+        security import test.cer -k build.keychain-db
         # security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
         # sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test.cer
         echo "------------------------------------"
         echo "check sum"
         openssl sha1 test.cer
+
+    - name: some other chek loc
+      run: ls
 
 
     # -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
@@ -147,7 +147,7 @@ jobs:
     #   run: openssl sha1 test2.p12
 
     - name: check added cert
-      run: security find-identity -p codesigning /Users/runner/Library/Keychains/build.keychain-db
+      run: security find-identity -p codesigning build.keychain-db
 
     - name: mac sign
       run: codesign --deep --force --verify --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
