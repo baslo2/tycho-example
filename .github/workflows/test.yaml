@@ -15,8 +15,7 @@ jobs:
         run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/} | cut -c 2-" >> $GITHUB_ENV
       - name: Test
-        run: |
-          echo $RELEASE_VERSION | cut -c 2-
+        run: echo $RELEASE_VERSION
 
   build:
     runs-on: macos-latest
