@@ -135,13 +135,13 @@ jobs:
         echo "chek loc"
         ls /tmp/Keychains
         echo "set default"
-        security default-keychain -s /private/tmp/Keychains/build.keychain
+        security default-keychain -s /tmp/Keychains/build.keychain
         echo "check default keychain"
         security list-keychains -d user
         echo "unlock"
-        security unlock-keychain -p "" /private/tmp/Keychains/build.keychain
+        security unlock-keychain -p "" /tmp/Keychains/build.keychain
         echo "import"
-        security import -k /private/tmp/Keychains/build.keychain /Users/runner/work/tycho-example/tycho-example/test/test.cer -T /usr/bin/codesign
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /tmp/Keychains/build.keychain -T /usr/bin/codesign
         echo "check aaded sert"
         security find-identity -p codesigning /private/tmp/Keychains/build.keychain
         
