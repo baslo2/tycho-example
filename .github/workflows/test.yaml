@@ -110,44 +110,44 @@ jobs:
           ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
 
-    - name: Create keystore
-      uses: 1arp/create-a-file-action@0.4.5
-      with:
-          path: test
-          isAbsolutePath: false
-          file: test.txt
-          content: ${{ secrets.MAC_CER_BASE_64 }}
+    # - name: Create keystore
+    #   uses: 1arp/create-a-file-action@0.4.5
+    #   with:
+    #       path: test
+    #       isAbsolutePath: false
+    #       file: test.txt
+    #       content: ${{ secrets.MAC_CER_BASE_64 }}
 
-    - name: check Keychains
-      run: ls /Library/Keychains
+    # - name: check Keychains
+    #   run: ls /Library/Keychains
 
-    - name: Install Apple Certificate
-      env:
-        CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
-        CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
-      run: |
-        echo "decode"
-        base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o /Users/runner/work/tycho-example/tycho-example/test/test.cer
-        echo "check cert"
-        ls
-        echo "create"
-        security create-keychain -p "" /tmp/Keychains/build.keychain
-        echo "chek loc"
-        ls /tmp/Keychains
-        echo "set default"
-        security default-keychain -s /tmp/Keychains/build.keychain
-        echo "check default keychain"
-        security list-keychains -d user
-        echo "unlock"
-        security unlock-keychain -p "" /tmp/Keychains/build.keychain
-        echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /tmp/Keychains/build.keychain -T /usr/bin/codesign
-        echo "check aaded sert"
-        security find-identity -p codesigning /private/tmp/Keychains/build.keychain
+    # - name: Install Apple Certificate
+    #   env:
+    #     CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
+    #     CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
+    #   run: |
+    #     echo "decode"
+    #     base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o /Users/runner/work/tycho-example/tycho-example/test/test.cer
+    #     echo "check cert"
+    #     ls
+    #     echo "create"
+    #     security create-keychain -p "" /tmp/Keychains/build.keychain
+    #     echo "chek loc"
+    #     ls /tmp/Keychains
+    #     echo "set default"
+    #     security default-keychain -s /tmp/Keychains/build.keychain
+    #     echo "check default keychain"
+    #     security list-keychains -d user
+    #     echo "unlock"
+    #     security unlock-keychain -p "" /tmp/Keychains/build.keychain
+    #     echo "import"
+    #     security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /tmp/Keychains/build.keychain -T /usr/bin/codesign
+    #     echo "check aaded sert"
+    #     security find-identity -p codesigning /private/tmp/Keychains/build.keychain
         
 
-    - name: some other chek loc
-      run: ls /tmp/Keychains
+    # - name: some other chek loc
+    #   run: ls /tmp/Keychains
 
 
         # echo "set-key-part-list"
@@ -158,14 +158,14 @@ jobs:
     # - name: check sum
     #   run: openssl sha1 test2.p12
 
-    - name: check added cert
-      run: security find-identity -p codesigning /tmp/Keychains/build.keychain
+    # - name: check added cert
+    #   run: security find-identity -p codesigning /tmp/Keychains/build.keychain
       
-    - name: check added cert
-      run: security find-identity -p codesigning /Library/Keychains/System.keychain
+    # - name: check added cert
+    #   run: security find-identity -p codesigning /Library/Keychains/System.keychain
 
-    - name: mac sign
-      run: codesign --deep --force --verify --keychain /tmp/Keychains/build.keychain --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
+    # - name: mac sign
+    #   run: codesign --deep --force --verify --keychain /tmp/Keychains/build.keychain --verbose --sign test /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app
       
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -186,7 +186,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL для загрузки артефактов
-        asset_path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Путь к файлу, который нужно загрузить
+        asset_path: /releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Путь к файлу, который нужно загрузить
         asset_name: com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Имя файла в релизе
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -195,7 +195,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL для загрузки артефактов
-        asset_path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz
+        asset_path: /releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz
         asset_name: com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz  # Имя файла в релизе
         asset_content_type: application/zip
         
@@ -209,7 +209,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL для загрузки артефактов
-        asset_path: /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-win32.win32.x86_64.zip  # Путь к файлу, который нужно загрузить
+        asset_path: /releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-win32.win32.x86_64.zip  # Путь к файлу, который нужно загрузить
         asset_name: com.vogella.tycho.product-win32.win32.x86_64.zip  # Имя файла в релизе
         asset_content_type: application/zip
 
