@@ -182,6 +182,7 @@ jobs:
     - name: Upload Release Asset
       uses: sekwah41/upload-release-assets@v1.1.0
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}  # URL для загрузки артефактов
         asset_path: ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-linux.gtk.x86_64.tar.gz  # Путь к файлу, который нужно загрузить
