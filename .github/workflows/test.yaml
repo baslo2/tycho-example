@@ -180,7 +180,7 @@ jobs:
         prerelease: false
 
     - name: Upload Release Asset
-      uses: baslo2/upload-release-assets@main
+      uses: https://github.com/baslo2/upload-release-asset@main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
