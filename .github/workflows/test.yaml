@@ -180,7 +180,7 @@ jobs:
         prerelease: false
 
     - name: Upload Release Asset
-      uses: ajanth-thangavelu-rillion/upload-release-asset@1.0.1
+      uses: sekwah41/upload-release-assets@v1.1.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
