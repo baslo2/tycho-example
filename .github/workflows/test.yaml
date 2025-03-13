@@ -180,7 +180,7 @@ jobs:
         prerelease: false
 
     - name: Upload Release Asset
-      uses: sekwah41/upload-release-assets@main
+      uses: baslo2/upload-release-assets@main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
