@@ -121,8 +121,8 @@ jobs:
     #   run: ls /Library/Keychains
 
 
-    # - name: list keychain
-    #   run: security list-keychains -d user
+    - name: list keychain
+      run: security list-keychains -d user
 
     - name: Install Apple Certificate
       env:
@@ -161,7 +161,7 @@ jobs:
     # - name: check sum
     #   run: openssl sha1 test2.p12
 
-      - name: check added cert
+    - name: check added cert
       run: security find-identity -p codesigning
 
     - name: check added cert
