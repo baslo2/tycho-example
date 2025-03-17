@@ -142,7 +142,7 @@ jobs:
         echo "import"
         security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain -T /usr/bin/codesign
         echo "check aded sert"
-        security find-identity -p codesigning /private/tmp/Keychains/build.keychain
+        security find-identity -p codesigning /private/temp/Keychains/build.keychain
         
 
     # - name: some other chek loc
