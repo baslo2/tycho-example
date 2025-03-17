@@ -120,6 +120,9 @@ jobs:
     # - name: check Keychains
     #   run: ls /Library/Keychains
 
+    - name: list keychain
+      run: security list-keychains
+
 
     - name: list keychain
       run: security list-keychains -d user
@@ -165,6 +168,12 @@ jobs:
 
     # - name: check sum
     #   run: openssl sha1 test2.p12
+
+    - name: list keychain
+      run: security list-keychains
+
+    - name: list keychain
+      run: security list-keychains -d user
 
     - name: check added cert
       run: security find-identity -p codesigning
