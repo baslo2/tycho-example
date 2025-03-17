@@ -121,8 +121,8 @@ jobs:
     #   run: ls /Library/Keychains
 
 
-    - name: list keychain
-      run: security list-keychains -d user
+    # - name: list keychain
+    #   run: security list-keychains -d user
 
     - name: Install Apple Certificate
       env:
