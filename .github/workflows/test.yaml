@@ -150,7 +150,7 @@ jobs:
         echo "check default keychain"
         security list-keychains -d user
         echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /temp/build.keychain -T /usr/bin/codesign
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k private/temp/build.keychain -T /usr/bin/codesign
         echo "check aded sert"
         security find-identity -p codesigning build.keychain
         
