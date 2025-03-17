@@ -137,8 +137,6 @@ jobs:
       run: |
         echo "decode"
         base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o /Users/runner/work/tycho-example/tycho-example/test/test.cer
-        echo "check cert"
-        ls
         echo "create"
         security create-keychain -p "" tmp/build.keychain
         echo "chek loc"
