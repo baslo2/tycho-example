@@ -140,7 +140,7 @@ jobs:
         echo "unlock"
         security unlock-keychain -p "" /tmp/Keychains/build.keychain
         echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /tmp/Keychains/build.keychain -T /usr/bin/codesign
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain -T /usr/bin/codesign
         echo "check aded sert"
         security find-identity -p codesigning /private/tmp/Keychains/build.keychain
         
