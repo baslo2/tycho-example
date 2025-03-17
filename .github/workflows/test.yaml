@@ -120,6 +120,10 @@ jobs:
     # - name: check Keychains
     #   run: ls /Library/Keychains
 
+
+    - name: list keychain
+      run: security list-keychains -d user
+
     - name: Install Apple Certificate
       env:
         CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
