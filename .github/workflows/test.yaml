@@ -140,23 +140,23 @@ jobs:
         echo "check cert"
         ls
         echo "create"
-        security create-keychain -p "" /tmp/Keychains/build.keychain
+        security create-keychain -p "" build.keychain
         echo "chek loc"
         ls /tmp/Keychains
         echo "set keychain settings"
-        security set-keychain-settings -lut 21600 /tmp/Keychains/build.keychain
+        security set-keychain-settings -lut 21600 build.keychain
         echo "unlock"
-        security unlock-keychain -p "" /tmp/Keychains/build.keychain
+        security unlock-keychain -p "" build.keychain
         echo "set default"
-        security default-keychain -s /tmp/Keychains/build.keychain
+        security default-keychain -s build.keychain
         echo "check default keychain"
         security list-keychains -d user
         echo "import"
-        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain -T /usr/bin/codesign
+        security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k build.keychain -T /usr/bin/codesign
         echo "set part"
-        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" /private/tmp/Keychains/build.keychain
+        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" build.keychain
         echo "check aded sert"
-        security find-identity -p codesigning /private/temp/Keychains/build.keychain
+        security find-identity -p codesigning build.keychain
         
 
     # - name: some other chek loc
