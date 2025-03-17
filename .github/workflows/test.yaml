@@ -140,13 +140,13 @@ jobs:
         echo "check cert"
         ls
         echo "create"
-        security create-keychain -p "" build.keychain
+        security create-keychain -p "" tmp/build.keychain
         echo "set keychain settings"
-        security set-keychain-settings -lut 21600 build.keychain
+        security set-keychain-settings -lut 21600 tmp/build.keychain
         echo "unlock"
-        security unlock-keychain -p "" build.keychain
+        security unlock-keychain -p "" tmp/build.keychain
         echo "set default"
-        security default-keychain -s build.keychain
+        security default-keychain -s tmp/build.keychain
         echo "check default keychain"
         security list-keychains -d user
         echo "import"
