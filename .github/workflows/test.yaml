@@ -161,6 +161,9 @@ jobs:
     # - name: check sum
     #   run: openssl sha1 test2.p12
 
+      - name: check added cert
+      run: security find-identity -p codesigning
+
     - name: check added cert
       run: security find-identity -p codesigning /tmp/Keychains/build.keychain
       
