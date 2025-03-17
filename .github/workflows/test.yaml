@@ -140,14 +140,18 @@ jobs:
         security create-keychain -p "" /tmp/Keychains/build.keychain
         echo "chek loc"
         ls /tmp/Keychains
+        echo "set keychain settings"
+        security set-keychain-settings -lut 21600 /tmp/Keychains/build.keychain
+        echo "unlock"
+        security unlock-keychain -p "" /tmp/Keychains/build.keychain
         echo "set default"
         security default-keychain -s /tmp/Keychains/build.keychain
         echo "check default keychain"
         security list-keychains -d user
-        echo "unlock"
-        security unlock-keychain -p "" /tmp/Keychains/build.keychain
         echo "import"
         security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain -T /usr/bin/codesign
+        echo "set part"
+        security set-key-partition-list -S apple-tool:,apple: -k "" /tmp/Keychains/build.keychain
         echo "check aded sert"
         security find-identity -p codesigning /private/temp/Keychains/build.keychain
         
