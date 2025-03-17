@@ -130,9 +130,33 @@ jobs:
     - name: check added cert
       run: security find-identity -p codesigning
 
+    # - name: Install Apple Certificate
+    #   env:
+    #     CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
+    #     CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
+    #   run: |
+    #     echo "decode"
+    #     base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o /Users/runner/work/tycho-example/tycho-example/test/test.cer
+    #     echo "create"
+    #     security create-keychain -p "" /tmp/build.keychain
+    #     echo "chek loc"
+    #     ls /tmp
+    #     echo "set keychain settings"
+    #     security set-keychain-settings -lut 21600 /tmp/build.keychain
+    #     echo "unlock"
+    #     security unlock-keychain -p "" /tmp/build.keychain
+    #     echo "set default"
+    #     security default-keychain -s /tmp/build.keychain
+    #     echo "check default keychain"
+    #     security list-keychains -d user
+    #     echo "import"
+    #     security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/build.keychain -T /usr/bin/codesign -T /usr/bin/security
+    #     echo "check aded sert"
+    #     security find-identity -p codesigning build.keychain
+
     - name: Install Apple Certificate
       env:
-        CERTIFICATE_P12: ${{ secrets.MAC_CERT_BASE_64 }}
+        CERTIFICATE_P12: ${{ secrets.MAC_CERT_P12 }}
         CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERT_PASS }}
       run: |
         echo "decode"
