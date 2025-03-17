@@ -150,8 +150,6 @@ jobs:
         security list-keychains -d user
         echo "import"
         security import /Users/runner/work/tycho-example/tycho-example/test/test.cer -k /private/tmp/Keychains/build.keychain -T /usr/bin/codesign
-        echo "set part"
-        security set-key-partition-list -S apple-tool:,test: -k "" /private/tmp/Keychains/build.keychain
         echo "check aded sert"
         security find-identity -p codesigning /private/temp/Keychains/build.keychain
         
