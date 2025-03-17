@@ -141,8 +141,6 @@ jobs:
         ls
         echo "create"
         security create-keychain -p "" build.keychain
-        echo "chek loc"
-        ls /tmp/Keychains
         echo "set keychain settings"
         security set-keychain-settings -lut 21600 build.keychain
         echo "unlock"
