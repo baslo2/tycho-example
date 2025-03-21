@@ -188,7 +188,7 @@ jobs:
           security default-keychain -s build.keychain
           security unlock-keychain -p "" build.keychain
           security import certificate.p12 -f x509 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-          security find-identity -p codesigning build.keychain
+          security find-identity build.keychain
 
 
     # security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" build.keychain
