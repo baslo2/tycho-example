@@ -109,13 +109,13 @@ jobs:
     #       ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
 
 
-    - name: Create keystore
-      uses: 1arp/create-a-file-action@0.4.5
-      with:
-          path: test
-          isAbsolutePath: false
-          file: test.txt
-          content: ${{ secrets.MAC_CER_BASE_64 }}
+    # - name: Create keystore
+    #   uses: 1arp/create-a-file-action@0.4.5
+    #   with:
+    #       path: test
+    #       isAbsolutePath: false
+    #       file: test.txt
+    #       content: ${{ secrets.MAC_CER_BASE_64 }}
 
     # - name: check Keychains
     #   run: ls /Library/Keychains
