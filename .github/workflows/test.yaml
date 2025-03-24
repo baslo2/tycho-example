@@ -115,7 +115,7 @@ jobs:
           path: test
           isAbsolutePath: false
           file: test.txt
-          content: ${{ secrets.MAC_CER_P12 }}
+          content: ${{ secrets.MAC_CERT_P12 }}
 
     # - name: check Keychains
     #   run: ls /Library/Keychains
