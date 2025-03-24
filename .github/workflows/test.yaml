@@ -111,6 +111,7 @@ jobs:
           echo "unlocked"
           security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
           echo "import finished"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" build.keychain
           security find-identity build.keychain
 
 
