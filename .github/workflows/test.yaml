@@ -184,10 +184,15 @@ jobs:
           MACOS_CERTIFICATE_PWD: ${{ secrets.MAC_CERT_PASS }}
       run: |
           base64 --decode -i /Users/runner/work/tycho-example/tycho-example/test/test.txt -o certificate.p12
+          echo "decode finished"
           security create-keychain -p "" build.keychain
+          echo "crete keychain finished"
           security default-keychain -s build.keychain
+          echo "setted as default"
           security unlock-keychain -p "" build.keychain
+          echo "unlocked"
           security import certificate.p12 -f x509 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          echo "import finished"
           security find-identity build.keychain
 
 
