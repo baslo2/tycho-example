@@ -191,7 +191,7 @@ jobs:
           echo "setted as default"
           security unlock-keychain -p "" build.keychain
           echo "unlocked"
-          security import certificate.p12 -f x509 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
           echo "import finished"
           security find-identity build.keychain
 
