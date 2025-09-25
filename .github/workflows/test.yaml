@@ -156,6 +156,13 @@ jobs:
 
     - name: check release ver
       run: echo ${{ github.ref_name }}
+
+    - name: Get latest tag
+      uses: actions-ecosystem/action-get-latest-tag@v1
+      id: latest-tag
+      with:
+        repository: ${{ github.repository }}
+        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Create GitHub Release
       id: create_release
@@ -163,7 +170,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Токен для доступа к GitHub API
       with:
-        tag_name: v${{ env.RELEASE_VERSION }}
+        tag_name: ${{ steps.latest-tag.outputs.tag }}
         release_name: Release ${{ env.RELEASE_VERSION }}
         draft: false
         prerelease: false
