@@ -1,9 +1,9 @@
-name: Release Workflow
+    - name: check added cert
+      run: security find-identity -p codesigningname: Release Workflow
 
 on:
   push:
-     tags:
-       - 'v*.*.*'
+     branches: [ "main" ]
 
 jobs:
   test:
