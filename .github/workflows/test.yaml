@@ -1,6 +1,3 @@
-    - name: check added cert
-      run: security find-identity -p codesigningname: Release Workflow
-
 on:
   push:
 
