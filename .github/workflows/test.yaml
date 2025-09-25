@@ -173,7 +173,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${{ env.LATEST_TAG }}
+        tag_name: v0.0.236
         release_name: Release ${{ env.RELEASE_VERSION }}
         draft: false
         prerelease: false
