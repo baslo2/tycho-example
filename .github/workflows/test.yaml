@@ -157,20 +157,23 @@ jobs:
     - name: check release ver
       run: echo ${{ github.ref_name }}
 
-    - name: Get latest tag
-      uses: actions-ecosystem/action-get-latest-tag@v1
-      id: latest-tag
-      with:
-        repository: ${{ github.repository }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get latest tag info
+      run: |
+          git fetch --tags
+          echo "All tags:"
+          git tag --sort=-version:refname
+    
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
       
     - name: Create GitHub Release
       id: create_release
       uses: comnoco/create-release-action@v2.0.5
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Токен для доступа к GitHub API
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
-        tag_name: ${{ steps.latest-tag.outputs.tag }}
+        tag_name: ${{ LATEST_TAG }}
         release_name: Release ${{ env.RELEASE_VERSION }}
         draft: false
         prerelease: false
