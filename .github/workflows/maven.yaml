@@ -9,6 +9,9 @@ jobs:
     runs-on: macos-latest
     steps:
 
+    - name: checkout test
+      uses: actions/checkout@v4
+
     - name: Debug tags
       run: |
         echo "Current ref: ${{ github.ref }}"
