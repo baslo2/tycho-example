@@ -9,78 +9,92 @@ jobs:
     runs-on: macos-latest
     steps:
 
-      - name: Get latest release ID
-        id: get_release_id
-        run: |
-          RELEASE_ID=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          https://api.github.com/repos/${{ github.repository }}/releases/latest | jq .id)
-          echo "::set-output name=release_id::$RELEASE_ID"
-        # - name: download jre
-        #   run: |
-        #     mkdir tmp
-        #     ls
-        #     echo "------------------------------"
-        #     cd tmp
-        #     mkdir jre
-        #     ls
-        #     echo "------------------------------"
-        #     cd jre
-        #     mkdir x86
-        #     mkdir aarch64
-        #     ls
-        #     cd
-        #     echo "------------------------------"
-        #     ls
-        #     echo "------------------------------"
-        #     ls work/tycho-example/tycho-example/tmp
-        #     echo "------------------------------"
-        #     echo "download jre"
-        #     curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
-        #     echo "download finished"
-        #     echo "----------------------------------"
-        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
-        #     echo "extract archive"
-        #     tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
-        #     echo "extract finished"
-        #     echo "--------------------------------"
-        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
-        #     echo "-------------------------------------"
-        #     echo "rename directory"
-        #     mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
-        #     echo "rename finished"
-        #     echo "------------------------------------"
-        #     ls work/tycho-example/tycho-example/tmp/jre/x86/
-        #     echo "--------------------------------------"
-        #     ls work/tycho-example/tycho-example/tmp/jre/x86/jre/
+    - name: Debug tags
+      run: |
+        echo "Current ref: ${{ github.ref }}"
+        echo "Ref name: ${{ github.ref_name }}"
+        echo "All tags:"
+        git tag -l
+        echo "Sorted tags:"
+        git tag --sort=-version:refname
+
+# jobs:
+#   test:
+#     runs-on: macos-latest
+#     steps:
+
+#       - name: Get latest release ID
+#         id: get_release_id
+#         run: |
+#           RELEASE_ID=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+#           https://api.github.com/repos/${{ github.repository }}/releases/latest | jq .id)
+#           echo "::set-output name=release_id::$RELEASE_ID"
+#         # - name: download jre
+#         #   run: |
+#         #     mkdir tmp
+#         #     ls
+#         #     echo "------------------------------"
+#         #     cd tmp
+#         #     mkdir jre
+#         #     ls
+#         #     echo "------------------------------"
+#         #     cd jre
+#         #     mkdir x86
+#         #     mkdir aarch64
+#         #     ls
+#         #     cd
+#         #     echo "------------------------------"
+#         #     ls
+#         #     echo "------------------------------"
+#         #     ls work/tycho-example/tycho-example/tmp
+#         #     echo "------------------------------"
+#         #     echo "download jre"
+#         #     curl -L -o work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
+#         #     echo "download finished"
+#         #     echo "----------------------------------"
+#         #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+#         #     echo "extract archive"
+#         #     tar -xzf work/tycho-example/tycho-example/tmp/jre/x86/jre.tar.gz -C work/tycho-example/tycho-example/tmp/jre/x86/
+#         #     echo "extract finished"
+#         #     echo "--------------------------------"
+#         #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+#         #     echo "-------------------------------------"
+#         #     echo "rename directory"
+#         #     mv work/tycho-example/tycho-example/tmp/jre/x86/jdk-17.0.14+7-jre work/tycho-example/tycho-example/tmp/jre/x86/jre
+#         #     echo "rename finished"
+#         #     echo "------------------------------------"
+#         #     ls work/tycho-example/tycho-example/tmp/jre/x86/
+#         #     echo "--------------------------------------"
+#         #     ls work/tycho-example/tycho-example/tmp/jre/x86/jre/
             
             
 
     
-      - uses: actions/setup-java@v2
-        with:
-          distribution: "adopt"
-          java-version: "21"
-      - name: Create keystore
-        uses: 1arp/create-a-file-action@0.4.5
-        with:
-          path: test
-          isAbsolutePath: false
-          file: test.txt
-          content: ${{ secrets.MAC_CER_BASE_64 }}
-      - name: decode keystore
-        run: base64 --decode -i test/test.txt -o test/test.cer
-      - name: Check cer location   
-        run: ls test
-      - name: add cer to Keychain
-        run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test/test.cer
-      - name: check added cert
-        run: security find-certificate -c "test" /Library/Keychains/System.keychain
-      # - name: check trust
-      #   run: security dump-trust-settings
-      - name: check cert
-        run: security find-certificate -p /Library/KeyChains/System.keychain | openssl x509 -text -noout
-      # - name: check cer keystore
-      #   run: openssl x509 -in test.cer -text -noout
+#       - uses: actions/setup-java@v2
+#         with:
+#           distribution: "adopt"
+#           java-version: "21"
+#       - name: Create keystore
+#         uses: 1arp/create-a-file-action@0.4.5
+#         with:
+#           path: test
+#           isAbsolutePath: false
+#           file: test.txt
+#           content: ${{ secrets.MAC_CER_BASE_64 }}
+#       - name: decode keystore
+#         run: base64 --decode -i test/test.txt -o test/test.cer
+#       - name: Check cer location   
+#         run: ls test
+#       - name: add cer to Keychain
+#         run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain test/test.cer
+#       - name: check added cert
+#         run: security find-certificate -c "test" /Library/Keychains/System.keychain
+#       # - name: check trust
+#       #   run: security dump-trust-settings
+#       - name: check cert
+#         run: security find-certificate -p /Library/KeyChains/System.keychain | openssl x509 -text -noout
+#       # - name: check cer keystore
+#       #   run: openssl x509 -in test.cer -text -noout
 
           
       # - name: Decode keystore
