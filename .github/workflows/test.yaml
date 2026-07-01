@@ -28,41 +28,6 @@ jobs:
         distribution: 'adopt'
         java-version: '21'
     
-    - name: check jks loc
-      run: ls ${{ github.workspace }}/keystore
-    - name: build
-      run: |
-            ls /Users/runner/work/tycho-example/tycho-example/
-            echo "--------------------------------"
-            echo "create temp dirs for jre"
-            mkdir ${{ github.workspace }}/jre
-            cd jre
-            mkdir x86
-            mkdir aarch64
-            cd
-            echo "----------------------------------"
-            echo "download jre"
-            curl -L -o ${{ github.workspace }}/jre/x86/jre.tar.gz https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jre_x64_mac_hotspot_17.0.14_7.tar.gz
-            echo "download finished"
-            echo "----------------------------------"
-            echo "extract archive"
-            tar -xzf ${{ github.workspace }}/jre/x86/jre.tar.gz -C ${{ github.workspace }}/jre/x86/
-            echo "extract finished"
-            echo "-------------------------------------"
-            echo "rename directory"
-            mv ${{ github.workspace }}/jre/x86/jdk-17.0.14+7-jre ${{ github.workspace }}/jre/x86/jre
-            echo "rename finished"
-            echo "------------------------------------"
-            echo "list jre loc"
-            ls ${{ github.workspace }}/jre/x86
-            echo "--------------------------------------"
-            cd ${{ github.workspace }}
-            mvn verify -DskipTests
-            echo "--------------------------------------"
-            echo "list macos build"
-            ls ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/Eclipse.app/Contents/Eclipse
-
-
     - name: compress macos build
       run: |
         cd /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/
