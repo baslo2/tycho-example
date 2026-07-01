@@ -27,6 +27,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '21'
+
+    - name: build
+      run: mvn verify -DskipTests
     
     - name: check release ver
       run: echo ${{ github.ref_name }}
@@ -34,8 +37,8 @@ jobs:
     - name: Create GitHub Release and Upload Assets
       uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b #v3.0.0
       with:
-        tag_name: v7.7.7
-        name: Release 7.7.7
+        tag_name: v7.7.8
+        name: Release 7.7.8
         draft: false
         prerelease: false
         files: |
