@@ -28,11 +28,6 @@ jobs:
         distribution: 'adopt'
         java-version: '21'
     
-    - name: compress macos build
-      run: |
-        cd /Users/runner/work/tycho-example/tycho-example/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product/macosx/cocoa/x86_64/
-        tar -cf ${{ github.workspace }}/releng/com.vogella.tycho.product/target/products/com.vogella.tycho.product-macosx.cocoa.x86_64.tar.gz Eclipse.app
-      
     - name: check release ver
       run: echo ${{ github.ref_name }}
 
